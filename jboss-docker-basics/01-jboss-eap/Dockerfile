@@ -41,7 +41,6 @@ ENV APPD_LOGS="$JAVA_AGENT_HOME/ver4.1.7.1/logs/$APPDYNAMICS_AGENT_NODE_NAME"
 EXPOSE 8080 9990 9999
 
 RUN chown -R 1001:0 $JBOSS_HOME && \
-    chown -R 1001:0 $HOME/.pki && \
     chmod -R ug+rw $JBOSS_HOME && \
 
 RUN chown -R 1001:0 $JAVA_AGENT_HOME && \
