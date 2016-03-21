@@ -1,8 +1,8 @@
 ### Set the base image to the one built before
-FROM sfaulhab/jboss-eap-6.4
+FROM eap6.4-appd
 
 ### File Author / Maintainer
-MAINTAINER "Sebastian Faulhaber" "sebastian.faulhaber@redhat.com"
+MAINTAINER "Robert Greathouse" "cyotee@gmail.com"
 
 ### Add application to JBoss EAP
 COPY app/ticket-monster.war $JBOSS_HOME/standalone/deployments/
