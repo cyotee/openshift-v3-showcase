@@ -18,9 +18,15 @@ COPY installs/AppServerAgent.zip /tmp/AppServerAgent.zip
 RUN echo "Installing JBoss EAP 6.4" && \
     unzip /tmp/jboss-eap-6.4.0.zip -d $JBOSS_PATH
 
+USER root
+
 RUN echo "Creating AppDynamics Java Server Agent install path." && \
     mkdir -p $JAVA_AGENT_HOME && \
-    echo "Install AppDynamics Java Server Agent." && \
+    chown -R jboss:jboss $JAVA_AGENT_HOME && \
+    chmod -R ug+rw $JAVA_AGENT_HOME && \
+    chmod -R g+rw $JAVA_AGENT_HOME
+
+RUN echo "Install AppDynamics Java Server Agent." && \
     unzip /tmp/AppServerAgent.zip -d $JAVA_AGENT_HOME
 
 RUN echo "Adding JBoss admin user." && \
