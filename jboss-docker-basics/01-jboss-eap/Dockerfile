@@ -47,7 +47,7 @@ RUN chown -R 1001:0 $JAVA_AGENT_HOME && \
     chmod -R ug+rw $JAVA_AGENT_HOME && \
     chmod -R g+rw $JAVA_AGENT_HOME
 
-RUN yum install -y scp zip unzip
+RUN yum install -y openssh-clients zip unzip
 
 USER 1001
 
