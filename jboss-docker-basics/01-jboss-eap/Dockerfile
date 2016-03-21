@@ -26,6 +26,7 @@ RUN echo "Creating AppDynamics Java Server Agent install path." && \
     chmod -R ug+rw $JAVA_AGENT_HOME && \
     chmod -R g+rw $JAVA_AGENT_HOME
 
+USER jboss
 RUN echo "Install AppDynamics Java Server Agent." && \
     unzip /tmp/AppServerAgent.zip -d $JAVA_AGENT_HOME
 
@@ -35,9 +36,6 @@ RUN echo "Adding JBoss admin user." && \
 ### Configure EAP
 RUN echo "JAVA_OPTS=\"\$JAVA_OPTS -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0 -javaagent:${JAVA_AGENT_HOME}/javaagent.jar -Xbootclasspath/p:$(ls ${JBOSS_HOME}/modules/system/layers/base/org/jboss/logmanager/main/jboss-logmanager-*.jar)\"" >> $JBOSS_HOME/bin/standalone.conf
 
-ENV APPDYNAMICS_AGENT_APPLICATION_NAME=ticket-monster
-ENV APPDYNAMICS_AGENT_TIER_NAME="Stage"
-ENV APPDYNAMICS_AGENT_NODE_NAME="rhel-ose.vm"
 ENV APPD_LOGS="$JAVA_AGENT_HOME/ver4.1.7.1/logs/$APPDYNAMICS_AGENT_NODE_NAME"
 
 ### Open Ports
