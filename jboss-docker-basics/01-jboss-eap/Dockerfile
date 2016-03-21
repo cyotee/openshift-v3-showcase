@@ -15,9 +15,15 @@ ENV JAVA_OPTS="-Xms1303m -Xmx1303m -XX:MaxPermSize=256m -Djava.net.preferIPv4Sta
 ### Install EAP 6.4.0
 COPY installs/jboss-eap-6.4.0.zip /tmp/jboss-eap-6.4.0.zip
 COPY installs/AppServerAgent.zip /tmp/AppServerAgent.zip
-RUN unzip /tmp/jboss-eap-6.4.0.zip -d $JBOSS_PATH && \
-    $JBOSS_HOME/bin/add-user.sh admin admin123! --silent && \
+RUN echo "Installing JBoss EAP 6.4" && \
+    unzip /tmp/jboss-eap-6.4.0.zip -d $JBOSS_PATH
+
+RUN echo "Adding JBoss admin user." && \
+    $JBOSS_HOME/bin/add-user.sh admin admin123! --silent
+
+RUN echo "Creating AppDynamics Java Server Agent install path." && \
     mkdir -p $JAVA_AGENT_HOME && \
+    echo "Install AppDynamics Java Server Agent." && \
     unzip /tmp/AppServerAgent.zip -d $JAVA_AGENT_HOME
 
 ### Configure EAP
