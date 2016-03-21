@@ -26,8 +26,6 @@ RUN echo "Creating AppDynamics Java Server Agent install path." && \
     chmod -R ug+rw $JAVA_AGENT_HOME && \
     chmod -R g+rw $JAVA_AGENT_HOME
 
-USER jboss
-
 RUN echo "Install AppDynamics Java Server Agent." && \
     unzip /tmp/AppServerAgent.zip -d $JAVA_AGENT_HOME
 
